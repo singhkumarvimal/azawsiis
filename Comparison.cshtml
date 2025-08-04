@@ -1,0 +1,395 @@
+@using AzureAwsComparisonDotNet.Models
+@model ServiceData
+
+@{
+    ViewData["Title"] = "Platform Comparison";
+}
+
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Platform Comparison</h2>
+            <p class="text-muted">
+                Detailed side-by-side comparison of Microsoft Azure and Amazon Web Services 
+                across key areas to help you make the right choice for your organization.
+            </p>
+        </div>
+
+        <!-- Quick Comparison Cards -->
+        <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
+            <div class="col">
+                <div class="card h-100 border-azure-blue">
+                    <div class="card-header bg-azure-blue text-white">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-white me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                <span class="text-azure-blue fw-bold">Az</span>
+                            </div>
+                            <div>
+                                <h5 class="mb-0">Microsoft Azure</h5>
+                                <small>Enterprise-focused cloud platform</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center mb-3">
+                            <div class="col-4">
+                                <div class="fw-bold h5 text-azure-blue">60+</div>
+                                <div class="small text-muted">Regions</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="fw-bold h5 text-azure-blue">23%</div>
+                                <div class="small text-muted">Market Share</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="fw-bold h5 text-azure-blue">2010</div>
+                                <div class="small text-muted">Founded</div>
+                            </div>
+                        </div>
+                        <h6 class="fw-bold">Key Strengths</h6>
+                        <ul class="list-unstyled small">
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Seamless Microsoft ecosystem integration</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Strong hybrid cloud capabilities</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Enterprise-grade security and compliance</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Competitive pricing for Windows workloads</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 border-aws-orange">
+                    <div class="card-header bg-aws-orange text-white">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-white me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                <span class="text-aws-orange fw-bold">AWS</span>
+                            </div>
+                            <div>
+                                <h5 class="mb-0">Amazon Web Services</h5>
+                                <small>Comprehensive cloud computing platform</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center mb-3">
+                            <div class="col-4">
+                                <div class="fw-bold h5 text-aws-orange">33</div>
+                                <div class="small text-muted">Regions</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="fw-bold h5 text-aws-orange">32%</div>
+                                <div class="small text-muted">Market Share</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="fw-bold h5 text-aws-orange">2006</div>
+                                <div class="small text-muted">Founded</div>
+                            </div>
+                        </div>
+                        <h6 class="fw-bold">Key Strengths</h6>
+                        <ul class="list-unstyled small">
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Most comprehensive service portfolio</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Pioneer in cloud innovation</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Mature ecosystem and community</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Advanced cost optimization tools</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Comparison Table -->
+        <div class="card shadow-sm">
+            <div class="card-header bg-light">
+                <h4 class="mb-0">Detailed Feature Comparison</h4>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col" class="border-0 fw-bold" style="width: 25%;">Category</th>
+                                <th scope="col" class="border-0 fw-bold text-azure-blue" style="width: 37.5%;">
+                                    <div class="d-flex align-items-center">
+                                        <div class="rounded-circle bg-azure-blue me-2" style="width: 12px; height: 12px;"></div>
+                                        Microsoft Azure
+                                    </div>
+                                </th>
+                                <th scope="col" class="border-0 fw-bold text-aws-orange" style="width: 37.5%;">
+                                    <div class="d-flex align-items-center">
+                                        <div class="rounded-circle bg-aws-orange me-2" style="width: 12px; height: 12px;"></div>
+                                        Amazon Web Services
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fw-semibold">
+                                    <i class="bi bi-globe me-2 text-muted"></i>
+                                    Global Infrastructure
+                                </td>
+                                <td>
+                                    <div class="small">
+                                        <strong>60+ regions worldwide</strong><br>
+                                        Strong presence in Europe and Asia<br>
+                                        Availability Zones in most regions
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="small">
+                                        <strong>33 regions, 105 Availability Zones</strong><br>
+                                        Extensive global footprint<br>
+                                        More edge locations globally
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-semibold">
+                                    <i class="bi bi-server me-2 text-muted"></i>
+                                    Compute Services
+                                </td>
+                                <td>
+                                    <div class="small">
+                                        <strong>Virtual Machines, Container Instances</strong><br>
+                                        Azure Kubernetes Service (AKS)<br>
+                                        Azure Functions (serverless)
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="small">
+                                        <strong>EC2, ECS, EKS</strong><br>
+                                        AWS Lambda (serverless)<br>
+                                        AWS Fargate (containers)
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-semibold">
+                                    <i class="bi bi-hdd me-2 text-muted"></i>
+                                    Storage Options
+                                </td>
+                                <td>
+                                    <div class="small">
+                                        <strong>Blob Storage, Files, Disks</strong><br>
+                                        Multiple access tiers<br>
+                                        Strong consistency model
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="small">
+                                        <strong>S3, EBS, EFS</strong><br>
+                                        Multiple storage classes<br>
+                                        Industry-standard object storage
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-semibold">
+                                    <i class="bi bi-database me-2 text-muted"></i>
+                                    Database Services
+                                </td>
+                                <td>
+                                    <div class="small">
+                                        <strong>SQL Database, Cosmos DB</strong><br>
+                                        Strong SQL Server integration<br>
+                                        Multi-model NoSQL support
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="small">
+                                        <strong>RDS, DynamoDB, Aurora</strong><br>
+                                        Multiple database engines<br>
+                                        Serverless database options
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-semibold">
+                                    <i class="bi bi-cpu me-2 text-muted"></i>
+                                    AI & Machine Learning
+                                </td>
+                                <td>
+                                    <div class="small">
+                                        <strong>Cognitive Services, ML Studio</strong><br>
+                                        Pre-built AI models<br>
+                                        Strong enterprise AI focus
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="small">
+                                        <strong>SageMaker, Rekognition, Comprehend</strong><br>
+                                        Comprehensive ML platform<br>
+                                        Advanced AI services portfolio
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-semibold">
+                                    <i class="bi bi-shield-check me-2 text-muted"></i>
+                                    Security & Compliance
+                                </td>
+                                <td>
+                                    <div class="small">
+                                        <strong>Azure AD, Security Center</strong><br>
+                                        Built-in security features<br>
+                                        Strong compliance certifications
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="small">
+                                        <strong>IAM, GuardDuty, Security Hub</strong><br>
+                                        Comprehensive security services<br>
+                                        Extensive compliance frameworks
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-semibold">
+                                    <i class="bi bi-currency-dollar me-2 text-muted"></i>
+                                    Pricing Model
+                                </td>
+                                <td>
+                                    <div class="small">
+                                        <strong>Pay-as-you-go, Reserved Instances</strong><br>
+                                        Hybrid benefit for Windows<br>
+                                        Competitive enterprise pricing
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="small">
+                                        <strong>On-demand, Reserved, Spot pricing</strong><br>
+                                        Extensive cost optimization tools<br>
+                                        Volume discounts available
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-semibold">
+                                    <i class="bi bi-people me-2 text-muted"></i>
+                                    Support & Community
+                                </td>
+                                <td>
+                                    <div class="small">
+                                        <strong>Microsoft support ecosystem</strong><br>
+                                        Strong enterprise support<br>
+                                        Growing developer community
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="small">
+                                        <strong>Extensive documentation</strong><br>
+                                        Large community and ecosystem<br>
+                                        Multiple support tiers
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decision Matrix -->
+        <div class="row row-cols-1 row-cols-md-2 g-4 mt-5">
+            <div class="col">
+                <div class="card border-azure-blue h-100">
+                    <div class="card-header bg-azure-blue text-white">
+                        <h5 class="mb-0">
+                            <i class="bi bi-check-circle me-2"></i>
+                            Choose Azure If:
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="bi bi-arrow-right-circle-fill text-azure-blue me-2"></i>
+                                <strong>Microsoft Ecosystem:</strong> Heavy use of Windows, Office 365, or .NET
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-arrow-right-circle-fill text-azure-blue me-2"></i>
+                                <strong>Hybrid Cloud:</strong> Need seamless on-premises integration
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-arrow-right-circle-fill text-azure-blue me-2"></i>
+                                <strong>Enterprise Focus:</strong> Large organization with complex compliance needs
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-arrow-right-circle-fill text-azure-blue me-2"></i>
+                                <strong>Cost Optimization:</strong> Windows workloads with hybrid benefits
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-arrow-right-circle-fill text-azure-blue me-2"></i>
+                                <strong>Development Tools:</strong> Visual Studio and Azure DevOps integration
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card border-aws-orange h-100">
+                    <div class="card-header bg-aws-orange text-white">
+                        <h5 class="mb-0">
+                            <i class="bi bi-check-circle me-2"></i>
+                            Choose AWS If:
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="bi bi-arrow-right-circle-fill text-aws-orange me-2"></i>
+                                <strong>Service Breadth:</strong> Need the most comprehensive service catalog
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-arrow-right-circle-fill text-aws-orange me-2"></i>
+                                <strong>Cloud-Native:</strong> Building modern, cloud-first applications
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-arrow-right-circle-fill text-aws-orange me-2"></i>
+                                <strong>Innovation:</strong> Want access to cutting-edge services first
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-arrow-right-circle-fill text-aws-orange me-2"></i>
+                                <strong>Ecosystem:</strong> Large community and third-party integrations
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-arrow-right-circle-fill text-aws-orange me-2"></i>
+                                <strong>Flexibility:</strong> Platform-agnostic with diverse workloads
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Migration Considerations -->
+        <div class="card mt-5">
+            <div class="card-header bg-light">
+                <h4 class="mb-0">
+                    <i class="bi bi-arrow-left-right me-2"></i>
+                    Migration Considerations
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="fw-bold">From On-Premises to Cloud</h6>
+                        <ul class="small">
+                            <li>Assess current infrastructure and dependencies</li>
+                            <li>Plan for data migration and network connectivity</li>
+                            <li>Consider hybrid approaches for gradual migration</li>
+                            <li>Evaluate licensing and cost implications</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="fw-bold">Between Cloud Providers</h6>
+                        <ul class="small">
+                            <li>Identify vendor-specific services and dependencies</li>
+                            <li>Plan for service mapping and architecture changes</li>
+                            <li>Consider multi-cloud strategies for risk mitigation</li>
+                            <li>Evaluate total cost of ownership changes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

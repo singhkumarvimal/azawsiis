@@ -1,0 +1,260 @@
+@using AzureAwsComparisonDotNet.Models
+@model ServiceData
+
+@{ ViewData["Title"] = "Home"; }
+
+<section class="jumbotron text-center bg-light py-5">
+    <div class="container">
+        <h1 class="display-4 fw-bold">
+            <span class="text-azure-blue">Azure</span> vs <span class="text-aws-orange">AWS</span>
+        </h1>
+        <p class="lead text-muted">
+            Comprehensive comparison of Microsoft Azure and Amazon Web Services. 
+            Compare services, pricing, and features to make informed cloud decisions.
+        </p>
+        
+        <div class="d-flex justify-content-center gap-3 mb-4">
+            <div class="d-flex align-items-center bg-white rounded-pill px-3 py-2 shadow-sm">
+                <i class="bi bi-cloud-fill text-azure-blue me-2"></i>
+                <span class="text-muted">200+ Services Compared</span>
+            </div>
+            <div class="d-flex align-items-center bg-white rounded-pill px-3 py-2 shadow-sm">
+                <i class="bi bi-lightning-fill text-aws-orange me-2"></i>
+                <span class="text-muted">Real-time Pricing</span>
+            </div>
+            <div class="d-flex align-items-center bg-white rounded-pill px-3 py-2 shadow-sm">
+                <i class="bi bi-arrow-repeat text-success me-2"></i>
+                <span class="text-muted">Updated Daily</span>
+            </div>
+        </div>
+
+        <p>
+            <a href="#services" class="btn btn-primary my-2 me-2">Compare Services</a>
+            <a href="#pricing" class="btn btn-outline-secondary my-2">View Pricing</a>
+        </p>
+    </div>
+</section>
+
+<section class="py-5 bg-white">
+    <div class="container">
+        <h2 class="text-center mb-4 fw-bold">Platform Overview</h2>
+        <p class="text-center text-muted mb-5">
+            Compare the key characteristics, strengths, and market positions of Microsoft Azure and Amazon Web Services.
+        </p>
+
+        <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
+            <div class="col">
+                <div class="card h-100 border-azure-blue bg-azure-blue-light">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-azure-blue rounded-circle p-2 me-3">
+                                <span class="text-white fw-bold">Az</span>
+                            </div>
+                            <div>
+                                <h5 class="card-title text-azure-blue mb-0">Microsoft Azure</h5>
+                                <p class="card-text text-muted small">Enterprise-focused cloud platform</p>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-6 mb-3">
+                                <i class="bi bi-globe text-azure-blue display-6"></i>
+                                <div class="fw-bold h4">60+</div>
+                                <div class="text-muted small">Global Regions</div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <i class="bi bi-calendar-event text-azure-blue display-6"></i>
+                                <div class="fw-bold h4">2010</div>
+                                <div class="text-muted small">Founded</div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <i class="bi bi-award text-azure-blue display-6"></i>
+                                <div class="fw-bold h4">23%</div>
+                                <div class="text-muted small">Market Share</div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <i class="bi bi-building text-azure-blue display-6"></i>
+                                <div class="fw-bold h4">Strong</div>
+                                <div class="text-muted small">Enterprise Focus</div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-wrap gap-2 mt-3">
+                            <span class="badge bg-azure-blue-light text-azure-blue border border-azure-blue">Hybrid Cloud Leader</span>
+                            <span class="badge bg-azure-blue-light text-azure-blue border border-azure-blue">Microsoft Integration</span>
+                            <span class="badge bg-azure-blue-light text-azure-blue border border-azure-blue">Enterprise Ready</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 border-aws-orange bg-aws-orange-light">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-aws-orange rounded-circle p-2 me-3">
+                                <span class="text-white fw-bold">AWS</span>
+                            </div>
+                            <div>
+                                <h5 class="card-title text-aws-orange mb-0">Amazon Web Services</h5>
+                                <p class="card-text text-muted small">Comprehensive cloud computing platform</p>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-6 mb-3">
+                                <i class="bi bi-globe text-aws-orange display-6"></i>
+                                <div class="fw-bold h4">33</div>
+                                <div class="text-muted small">Global Regions</div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <i class="bi bi-calendar-event text-aws-orange display-6"></i>
+                                <div class="fw-bold h4">2006</div>
+                                <div class="text-muted small">Founded</div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <i class="bi bi-award text-aws-orange display-6"></i>
+                                <div class="fw-bold h4">32%</div>
+                                <div class="text-muted small">Market Share</div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <i class="bi bi-lightning-fill text-aws-orange display-6"></i>
+                                <div class="fw-bold h4">200+</div>
+                                <div class="text-muted small">Service Count</div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-wrap gap-2 mt-3">
+                            <span class="badge bg-aws-orange-light text-aws-orange border border-aws-orange">Market Leader</span>
+                            <span class="badge bg-aws-orange-light text-aws-orange border border-aws-orange">Most Services</span>
+                            <span class="badge bg-aws-orange-light text-aws-orange border border-aws-orange">Innovation Pioneer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="text-center mb-4 fw-bold">Key Comparison Areas</h3>
+        <div class="row row-cols-1 g-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="row g-0">
+                            <div class="col-md-3 bg-light d-flex align-items-center justify-content-center p-3">
+                                <div class="text-center">
+                                    <i class="bi bi-award display-6 text-muted"></i>
+                                    <h5 class="fw-bold text-dark">Market Position</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-4 p-3 border-end">
+                                <h6 class="text-azure-blue">Azure</h6>
+                                <p class="card-text small text-muted">Second largest cloud provider with strong enterprise integration</p>
+                            </div>
+                            <div class="col-md-5 p-3">
+                                <h6 class="text-aws-orange">AWS</h6>
+                                <p class="card-text small text-muted">Market leader with the most comprehensive service portfolio</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="row g-0">
+                            <div class="col-md-3 bg-light d-flex align-items-center justify-content-center p-3">
+                                <div class="text-center">
+                                    <i class="bi bi-currency-dollar display-6 text-muted"></i>
+                                    <h5 class="fw-bold text-dark">Pricing Model</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-4 p-3 border-end">
+                                <h6 class="text-azure-blue">Azure</h6>
+                                <p class="card-text small text-muted">Competitive pricing with hybrid cloud discounts</p>
+                            </div>
+                            <div class="col-md-5 p-3">
+                                <h6 class="text-aws-orange">AWS</h6>
+                                <p class="card-text small text-muted">Pay-as-you-go with extensive cost optimization options</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="row g-0">
+                            <div class="col-md-3 bg-light d-flex align-items-center justify-content-center p-3">
+                                <div class="text-center">
+                                    <i class="bi bi-building display-6 text-muted"></i>
+                                    <h5 class="fw-bold text-dark">Enterprise Integration</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-4 p-3 border-end">
+                                <h6 class="text-azure-blue">Azure</h6>
+                                <p class="card-text small text-muted">Seamless integration with Microsoft ecosystem</p>
+                            </div>
+                            <div class="col-md-5 p-3">
+                                <h6 class="text-aws-orange">AWS</h6>
+                                <p class="card-text small text-muted">Strong enterprise features with broad third-party support</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="row g-0">
+                            <div class="col-md-3 bg-light d-flex align-items-center justify-content-center p-3">
+                                <div class="text-center">
+                                    <i class="bi bi-shield-check display-6 text-muted"></i>
+                                    <h5 class="fw-bold text-dark">Security & Compliance</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-4 p-3 border-end">
+                                <h6 class="text-azure-blue">Azure</h6>
+                                <p class="card-text small text-muted">Built-in security with compliance certifications</p>
+                            </div>
+                            <div class="col-md-5 p-3">
+                                <h6 class="text-aws-orange">AWS</h6>
+                                <p class="card-text small text-muted">Comprehensive security services and compliance frameworks</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-2 g-4 mt-5">
+            <div class="col">
+                <div class="card border-azure-blue">
+                    <div class="card-body">
+                        <h5 class="card-title text-azure-blue">Choose Azure If:</h5>
+                        <ul class="list-unstyled small">
+                            <li><i class="bi bi-check-circle-fill text-azure-blue me-2"></i>You're heavily invested in Microsoft ecosystem</li>
+                            <li><i class="bi bi-check-circle-fill text-azure-blue me-2"></i>You need strong hybrid cloud capabilities</li>
+                            <li><i class="bi bi-check-circle-fill text-azure-blue me-2"></i>Enterprise integration is a priority</li>
+                            <li><i class="bi bi-check-circle-fill text-azure-blue me-2"></i>You prefer integrated development tools</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card border-aws-orange">
+                    <div class="card-body">
+                        <h5 class="card-title text-aws-orange">Choose AWS If:</h5>
+                        <ul class="list-unstyled small">
+                            <li><i class="bi bi-check-circle-fill text-aws-orange me-2"></i>You want the most comprehensive service catalog</li>
+                            <li><i class="bi bi-check-circle-fill text-aws-orange me-2"></i>You're building cloud-native applications</li>
+                            <li><i class="bi bi-check-circle-fill text-aws-orange me-2"></i>You need cutting-edge services and features</li>
+                            <li><i class="bi bi-check-circle-fill text-aws-orange me-2"></i>You value mature ecosystem and community</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        // Add any specific scripts for the Home page here if needed
+    </script>
+}
+

@@ -1,0 +1,140 @@
+@model Dictionary<string, Dictionary<string, AzureAwsComparisonDotNet.Models.PricingDetails>>
+
+@{
+    ViewData["Title"] = "Pricing Comparison";
+}
+
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Pricing Comparison</h2>
+            <p class="text-muted">
+                Compare pricing across different service categories. Use official pricing calculators 
+                for accurate estimates based on your specific needs.
+            </p>
+        </div>
+
+        @foreach (var category in Model)
+        {
+            <div class="mb-5">
+                <h3 class="fw-bold text-capitalize mb-4">@category.Key Services</h3>
+                
+                <div class="card shadow-sm">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th scope="col" class="border-0 fw-bold">Service Configuration</th>
+                                        <th scope="col" class="border-0 fw-bold text-azure-blue">
+                                            <div class="d-flex align-items-center">
+                                                <div class="rounded-circle bg-azure-blue me-2" style="width: 12px; height: 12px;"></div>
+                                                Microsoft Azure
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="border-0 fw-bold text-aws-orange">
+                                            <div class="d-flex align-items-center">
+                                                <div class="rounded-circle bg-aws-orange me-2" style="width: 12px; height: 12px;"></div>
+                                                Amazon Web Services
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="border-0 fw-bold text-center">Best Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var pricing in category.Value)
+                                    {
+                                        <tr>
+                                            <td class="fw-semibold">@pricing.Key</td>
+                                            <td class="text-azure-blue fw-bold">@pricing.Value.Azure</td>
+                                            <td class="text-aws-orange fw-bold">@pricing.Value.Aws</td>
+                                            <td class="text-center">
+                                                @{
+                                                    var azurePrice = ExtractPrice(pricing.Value.Azure);
+                                                    var awsPrice = ExtractPrice(pricing.Value.Aws);
+                                                    var bestValue = azurePrice < awsPrice ? "Azure" : "AWS";
+                                                    var badgeClass = azurePrice < awsPrice ? "bg-azure-blue" : "bg-aws-orange";
+                                                }
+                                                <span class="badge @badgeClass">@bestValue</span>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Pricing Tips Section -->
+        <div class="row row-cols-1 row-cols-md-3 g-4 mt-5">
+            <div class="col">
+                <div class="card h-100 border-primary">
+                    <div class="card-body text-center">
+                        <div class="display-6 text-primary mb-3">
+                            <i class="bi bi-calculator"></i>
+                        </div>
+                        <h5 class="card-title">Cost Calculator</h5>
+                        <p class="card-text small text-muted">
+                            Use official pricing calculators for accurate estimates based on your specific needs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 border-success">
+                    <div class="card-body text-center">
+                        <div class="display-6 text-success mb-3">
+                            <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+                        <h5 class="card-title">Cost Optimization</h5>
+                        <p class="card-text small text-muted">
+                            Both providers offer reserved instances, spot pricing, and other cost-saving options.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 border-warning">
+                    <div class="card-body text-center">
+                        <div class="display-6 text-warning mb-3">
+                            <i class="bi bi-exclamation-triangle"></i>
+                        </div>
+                        <h5 class="card-title">Hidden Costs</h5>
+                        <p class="card-text small text-muted">
+                            Consider data transfer, support, and additional service costs in your total calculation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="alert alert-warning mt-5" role="alert">
+            <h6 class="alert-heading">
+                <i class="bi bi-info-circle me-2"></i>Pricing Disclaimer
+            </h6>
+            <p class="mb-0 small">
+                <strong>Prices shown are estimates based on standard configurations and may vary by region, usage patterns, and specific requirements.</strong>
+                Always use official pricing calculators for accurate quotes. Pricing and features are subject to change.
+                Microsoft Azure and Amazon Web Services are trademarks of their respective companies.
+            </p>
+        </div>
+    </div>
+</section>
+
+@functions {
+    private decimal ExtractPrice(string priceString)
+    {
+        // Simple price extraction - in a real app, this would be more sophisticated
+        var cleanPrice = priceString.Replace("$", "").Replace(",", "");
+        var match = System.Text.RegularExpressions.Regex.Match(cleanPrice, @"(\d+\.?\d*)");
+        if (match.Success && decimal.TryParse(match.Value, out decimal price))
+        {
+            return price;
+        }
+        return 0;
+    }
+}
+

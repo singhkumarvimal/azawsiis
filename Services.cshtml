@@ -1,0 +1,242 @@
+@using AzureAwsComparisonDotNet.Models
+@model List<ServiceComparison>
+
+@{
+    ViewData["Title"] = "Service Comparison";
+    var serviceCategories = ViewBag.ServiceCategories as List<ServiceCategory>;
+    var activeCategory = ViewBag.ActiveCategory as string;
+    var searchQuery = ViewBag.SearchQuery as string;
+    var serviceCounts = ViewBag.ServiceCounts as Dictionary<string, int>;
+}
+
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Service Comparison</h2>
+            <p class="text-muted">
+                Compare services across different categories. Each comparison includes features, 
+                pricing, pros and cons to help you make informed decisions.
+            </p>
+        </div>
+
+        <div class="row">
+            <!-- Category Filter Sidebar -->
+            <div class="col-lg-3 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-funnel me-2"></i>Filter by Category
+                        </h5>
+                        
+                        <div class="d-grid gap-2">
+                            <a href="@Url.Action("Services", new { category = "all" })" 
+                               class="btn @(activeCategory == "all" ? "btn-primary" : "btn-outline-primary") d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded me-2" style="width: 16px; height: 16px; background: linear-gradient(45deg, #0078D4, #FF9900);"></div>
+                                    <span>All Services</span>
+                                </div>
+                                <span class="badge bg-secondary">@(serviceCounts?.Values.Sum() ?? 0)</span>
+                            </a>
+                            
+                            @if (serviceCategories != null)
+                            {
+                                @foreach (var category in serviceCategories)
+                                {
+                                    <a href="@Url.Action("Services", new { category = category.Id })" 
+                                       class="btn @(activeCategory == category.Id ? "btn-primary" : "btn-outline-primary") d-flex justify-content-between align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-@(GetIconClass(category.Icon)) me-2"></i>
+                                            <span>@category.Name</span>
+                                        </div>
+                                        <span class="badge bg-secondary">@(serviceCounts?.GetValueOrDefault(category.Id, 0) ?? 0)</span>
+                                    </a>
+                                }
+                            }
+                        </div>
+                        
+                        <div class="mt-4 p-3 bg-light rounded">
+                            <h6 class="fw-bold small">Quick Stats</h6>
+                            <div class="small text-muted">
+                                <div class="d-flex justify-content-between">
+                                    <span>Total Services:</span>
+                                    <span class="fw-bold">@(serviceCounts?.Values.Sum() ?? 0)</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Categories:</span>
+                                    <span class="fw-bold">@(serviceCategories?.Count ?? 0)</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Last Updated:</span>
+                                    <span class="fw-bold">Today</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="col-lg-9">
+                @if (!string.IsNullOrEmpty(searchQuery))
+                {
+                    <div class="alert alert-info mb-4">
+                        <p class="mb-0">
+                            Showing @Model.Count results for "@searchQuery"
+                            @if (Model.Count == 0)
+                            {
+                                <br><small>Try adjusting your search terms or browse by category.</small>
+                            }
+                        </p>
+                    </div>
+                }
+
+                <div class="row row-cols-1 g-4">
+                    @if (Model.Any())
+                    {
+                        @foreach (var service in Model)
+                        {
+                            <div class="col">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-header bg-light">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h5 class="card-title mb-0">
+                                                <span class="text-azure-blue">@service.Azure.Name</span>
+                                                <span class="text-muted mx-2">vs</span>
+                                                <span class="text-aws-orange">@service.Aws.Name</span>
+                                            </h5>
+                                            <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" 
+                                                    data-bs-target="#details-@service.Category-@service.Azure.Name.Replace(" ", "")" 
+                                                    aria-expanded="false">
+                                                <i class="bi bi-chevron-down"></i>
+                                            </button>
+                                        </div>
+                                        <p class="card-text text-muted small mb-0">
+                                            Compare @service.Category solutions from both providers
+                                        </p>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <!-- Azure Service -->
+                                            <div class="col-md-6">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <div class="rounded-circle bg-azure-blue me-2" style="width: 12px; height: 12px;"></div>
+                                                    <h6 class="text-azure-blue mb-0">Microsoft Azure</h6>
+                                                </div>
+                                                <p class="small text-muted">@service.Azure.Description</p>
+                                                <span class="badge bg-light text-azure-blue border border-azure-blue">@service.Azure.Pricing</span>
+                                            </div>
+
+                                            <!-- AWS Service -->
+                                            <div class="col-md-6">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <div class="rounded-circle bg-aws-orange me-2" style="width: 12px; height: 12px;"></div>
+                                                    <h6 class="text-aws-orange mb-0">Amazon Web Services</h6>
+                                                </div>
+                                                <p class="small text-muted">@service.Aws.Description</p>
+                                                <span class="badge bg-light text-aws-orange border border-aws-orange">@service.Aws.Pricing</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Detailed Comparison (Collapsible) -->
+                                        <div class="collapse mt-3" id="details-@service.Category-@service.Azure.Name.Replace(" ", "")">
+                                            <hr>
+                                            <div class="row">
+                                                <!-- Azure Details -->
+                                                <div class="col-md-6">
+                                                    <h6 class="small fw-bold">Key Features</h6>
+                                                    <ul class="list-unstyled small">
+                                                        @foreach (var feature in service.Azure.Features)
+                                                        {
+                                                            <li><i class="bi bi-check-circle-fill text-success me-1"></i>@feature</li>
+                                                        }
+                                                    </ul>
+                                                    
+                                                    <h6 class="small fw-bold text-success">Pros</h6>
+                                                    <ul class="list-unstyled small">
+                                                        @foreach (var pro in service.Azure.Pros)
+                                                        {
+                                                            <li><i class="bi bi-check-circle-fill text-success me-1"></i>@pro</li>
+                                                        }
+                                                    </ul>
+                                                    
+                                                    <h6 class="small fw-bold text-danger">Cons</h6>
+                                                    <ul class="list-unstyled small">
+                                                        @foreach (var con in service.Azure.Cons)
+                                                        {
+                                                            <li><i class="bi bi-x-circle-fill text-danger me-1"></i>@con</li>
+                                                        }
+                                                    </ul>
+                                                </div>
+
+                                                <!-- AWS Details -->
+                                                <div class="col-md-6">
+                                                    <h6 class="small fw-bold">Key Features</h6>
+                                                    <ul class="list-unstyled small">
+                                                        @foreach (var feature in service.Aws.Features)
+                                                        {
+                                                            <li><i class="bi bi-check-circle-fill text-success me-1"></i>@feature</li>
+                                                        }
+                                                    </ul>
+                                                    
+                                                    <h6 class="small fw-bold text-success">Pros</h6>
+                                                    <ul class="list-unstyled small">
+                                                        @foreach (var pro in service.Aws.Pros)
+                                                        {
+                                                            <li><i class="bi bi-check-circle-fill text-success me-1"></i>@pro</li>
+                                                        }
+                                                    </ul>
+                                                    
+                                                    <h6 class="small fw-bold text-danger">Cons</h6>
+                                                    <ul class="list-unstyled small">
+                                                        @foreach (var con in service.Aws.Cons)
+                                                        {
+                                                            <li><i class="bi bi-x-circle-fill text-danger me-1"></i>@con</li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col">
+                            <div class="text-center py-5">
+                                <div class="display-1 text-muted mb-3">🔍</div>
+                                <h3 class="text-muted">
+                                    @(string.IsNullOrEmpty(searchQuery) ? "No services in this category" : "No services found")
+                                </h3>
+                                <p class="text-muted">
+                                    @(string.IsNullOrEmpty(searchQuery) 
+                                        ? "Select a different category to view services." 
+                                        : "Try different search terms or browse by category.")
+                                </p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@functions {
+    private string GetIconClass(string iconName)
+    {
+        return iconName switch
+        {
+            "Server" => "server",
+            "Database" => "database",
+            "HardDrive" => "hdd",
+            "Network" => "wifi",
+            "Brain" => "cpu",
+            "Shield" => "shield-check",
+            _ => "gear"
+        };
+    }
+}
+

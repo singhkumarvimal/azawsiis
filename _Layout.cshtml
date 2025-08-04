@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Azure vs AWS Comparison</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/tailwind.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <header class="sticky-top bg-white border-bottom shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-gradient rounded me-2 d-flex align-items-center justify-content-center" 
+                             style="width: 32px; height: 32px; background: linear-gradient(45deg, #0078D4, #FF9900);">
+                            <span class="text-white fw-bold small">VS</span>
+                        </div>
+                        <span class="fw-bold">
+                            <span class="text-azure-blue">Azure</span> 
+                            <span class="text-muted">vs</span> 
+                            <span class="text-aws-orange">AWS</span>
+                        </span>
+                    </div>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Overview</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Services">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Pricing">Pricing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Comparison">Comparison</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex" asp-controller="Home" asp-action="Services" method="get">
+                        <input class="form-control me-2" type="search" name="search" placeholder="Search services..." aria-label="Search">
+                        <button class="btn btn-outline-primary" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="bg-dark text-white mt-5">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="bg-gradient rounded me-2 d-flex align-items-center justify-content-center" 
+                             style="width: 32px; height: 32px; background: linear-gradient(45deg, #0078D4, #FF9900);">
+                            <span class="text-white fw-bold small">VS</span>
+                        </div>
+                        <h5 class="mb-0">Azure vs AWS</h5>
+                    </div>
+                    <p class="text-muted small">
+                        Comprehensive cloud platform comparison to help you make informed decisions.
+                    </p>
+                    <div class="d-flex align-items-center small text-muted">
+                        <span>Made with</span>
+                        <span class="text-danger mx-1">♥</span>
+                        <span>for the cloud community</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="text-azure-blue">Microsoft Azure</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="https://docs.microsoft.com/azure" class="text-muted text-decoration-none">Azure Documentation</a></li>
+                        <li><a href="https://azure.microsoft.com/pricing/calculator" class="text-muted text-decoration-none">Azure Pricing Calculator</a></li>
+                        <li><a href="https://status.azure.com" class="text-muted text-decoration-none">Azure Status</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="text-aws-orange">Amazon Web Services</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="https://docs.aws.amazon.com" class="text-muted text-decoration-none">AWS Documentation</a></li>
+                        <li><a href="https://calculator.aws" class="text-muted text-decoration-none">AWS Pricing Calculator</a></li>
+                        <li><a href="https://status.aws.amazon.com" class="text-muted text-decoration-none">AWS Status</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="text-light">About This Site</h6>
+                    <ul class="list-unstyled small text-muted">
+                        <li>Data updated daily from official sources</li>
+                        <li>Pricing estimates may vary by region</li>
+                        <li>Not affiliated with Microsoft or Amazon</li>
+                        <li>Open source comparison data</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-secondary">
+            <div class="d-flex justify-content-between align-items-center">
+                <p class="text-muted small mb-0">
+                    © @DateTime.Now.Year Azure vs AWS Comparison. All rights reserved.
+                </p>
+                <span class="text-muted small">
+                    Last updated: @DateTime.Now.ToShortDateString()
+                </span>
+            </div>
+        </div>
+        <div class="bg-secondary py-2">
+            <div class="container">
+                <p class="text-center text-muted small mb-0">
+                    <strong>Disclaimer:</strong> This comparison is for informational purposes only. 
+                    Pricing and features are subject to change. Always consult official documentation 
+                    and pricing calculators for the most current information.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
